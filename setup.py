@@ -11,7 +11,8 @@ _LONG_DESCRIPTION = (_THIS_DIR / "README.md").read_text()
 
 def get_version() -> str:
     VERSION_REGEX = re.compile(r"""__version__\s+=\s+['"]([0-9.]+)['"]""")
-    source_code = pathlib.Path(__file__).with_name("unimorph.py")
+    path = pathlib.Path(__file__).parent / "unimorph" / "setup.py"  
+    source_code = path.with_name("cli.py")
     match = VERSION_REGEX.search(source_code.read_text())
     if match is None:
         raise ValueError("Couldn't find version number.")
@@ -28,6 +29,7 @@ setup(
     author="Arya D. McCarthy",
     author_email="arya@jhu.edu",
     maintainer_email="arya@jhu.edu",
+    packages=["unimorph"],
     python_requires=">=3.6",
     classifiers=[
         # How mature is this project? Common values are
